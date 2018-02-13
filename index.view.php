@@ -8,7 +8,7 @@
 </head>
 <body>
 	<table class="table table-bordered">
-  <thead>
+  <thead class="thead-dark">
     <tr class="text-center">
         <th>LOT NO #</th>
         <th>LOC</th>
