@@ -51,26 +51,16 @@
   </thead>
   <tbody class="text-center">
   	      <?php while($diamonds =  mysqli_fetch_assoc($diamondResult)){
-              $office_name = mysqli_query($conn, "SELECT `office_name` from offices WHERE `office_id` = '".$diamonds['office_id']."'");
-              $office_array = mysqli_fetch_assoc($office_name);
-              $shape_name = mysqli_query($conn, "SELECT `attribute_name` as `shape` from attributes WHERE `attribute_id` = '".$diamonds['diamond_shape_id']."'");
-              $shape_array = mysqli_fetch_assoc($shape_name);
-              $lab_name = mysqli_query($conn, "SELECT `attribute_name` as `lab` from attributes WHERE `attribute_id` = '".$diamonds['diamond_lab_id']."'");
-              $lab_array = mysqli_fetch_assoc($lab_name);
-              $clr_name = mysqli_query($conn, "SELECT `attribute_name` as `clr` from attributes WHERE `attribute_id` = '".$diamonds['diamond_clr_id']."'");
-              $clr_array = mysqli_fetch_assoc($clr_name);
-              $cla_name = mysqli_query($conn, "SELECT `attribute_name` as `cla` from attributes WHERE `attribute_id` = '".$diamonds['diamond_cla_id']."'");
-              $cla_array = mysqli_fetch_assoc($cla_name);
-              $flr_name = mysqli_query($conn, "SELECT `attribute_name` as `flr` from attributes WHERE `attribute_id` = '".$diamonds['diamond_flr_id']."'");
-              $flr_array = mysqli_fetch_assoc($flr_name);
-              $fcut_name = mysqli_query($conn, "SELECT `attribute_name` as `fcut` from attributes WHERE `attribute_id` = '".$diamonds['diamond_fcut_id']."'");
-              $fcut_array = mysqli_fetch_assoc($fcut_name);
-              $pol_name = mysqli_query($conn, "SELECT `attribute_name` as `pol` from attributes WHERE `attribute_id` = '".$diamonds['diamond_pol_id']."'");
-              $pol_array = mysqli_fetch_assoc($pol_name);
-              $sym_name = mysqli_query($conn, "SELECT `attribute_name` as `sym` from attributes WHERE `attribute_id` = '".$diamonds['diamond_sym_id']."'");
-              $sym_array = mysqli_fetch_assoc($sym_name);
-              $company_name = mysqli_query($conn, "SELECT `company_name` from users WHERE `user_id` = '".$diamonds['diamond_customer_id']."'");
-              $company_array = mysqli_fetch_assoc($company_name);
+              $office_array = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `office_name` from offices WHERE `office_id` = '".$diamonds['office_id']."'"));
+              $shape_array = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `attribute_name` as `shape` from attributes WHERE `attribute_id` = '".$diamonds['diamond_shape_id']."'"));
+              $lab_array = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `attribute_name` as `lab` from attributes WHERE `attribute_id` = '".$diamonds['diamond_lab_id']."'"));
+              $clr_array = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `attribute_name` as `clr` from attributes WHERE `attribute_id` = '".$diamonds['diamond_clr_id']."'"));
+              $cla_array = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `attribute_name` as `cla` from attributes WHERE `attribute_id` = '".$diamonds['diamond_cla_id']."'"));
+              $flr_array = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `attribute_name` as `flr` from attributes WHERE `attribute_id` = '".$diamonds['diamond_flr_id']."'"));
+              $fcut_array = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `attribute_name` as `fcut` from attributes WHERE `attribute_id` = '".$diamonds['diamond_fcut_id']."'"));
+              $pol_array = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `attribute_name` as `pol` from attributes WHERE `attribute_id` = '".$diamonds['diamond_pol_id']."'"));
+              $sym_array = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `attribute_name` as `sym` from attributes WHERE `attribute_id` = '".$diamonds['diamond_sym_id']."'"));
+              $company_array = mysqli_fetch_assoc(mysqli_query($conn, "SELECT `company_name` from users WHERE `user_id` = '".$diamonds['diamond_customer_id']."'"));
            ?>
         <tr>
         <td><?php echo $diamonds['diamond_lot_no'];?></td>
@@ -108,7 +98,7 @@
         <td><?php
         	if($diamonds['diamond_show_rapnet'])
         		echo "Show";
-        	?>	
+        	?>
         </td>
         <td><?=date('d/m/Y',strtotime($diamonds['diamond_purchase_date'])) ?></td>
         <td><?=$diamonds['diamond_party_name']?></td>
