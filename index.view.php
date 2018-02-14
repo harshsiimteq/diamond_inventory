@@ -6,45 +6,27 @@
 	<title>Diamond | Certified</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-<body class="text-center">
+<body>
+	<?php $started_at = microtime(true); ?>
 <form style="margin-top: 3%;">
 	<div class="container">
 		<div class="form-group">
 			<div class="row">
-				<div class="col-md-4">
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="inputGroupSelect01">Diamond type</label>
-						</div>
-						<select class="custom-select" id="inputGroupSelect01">
-							<option selected>Choose...</option>
-							<?php foreach ($resultType as $types): ?>
-								<?php foreach ($types as $key => $value): ?>
-									<option value="<?=$key?>"><?=$value?></option>
-								<?php endforeach; ?>
-							<?php endforeach; ?>
-						</select>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="filterText">Diamond shape</label>
-						</div>
-						<select class="custom-select" id="product">
-							<option disabled selected>Choose Shapes...</option>
+				<div class="col-md-12">
+					<?php  ?>
 							<?php foreach ($resultTypeShape as $types): ?>
 								<?php foreach ($types as $key => $value): ?>
-									<option value="<?=$key?>"><?=$value?></option>
+									<button type="button" class="btn btn-primary" style="margin-bottom:1%;"><?=$value;?></button>
 								<?php endforeach; ?>
 							<?php endforeach; ?>
-						</select>
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </form>
+<div class="container">
+
+</div>
 		<table class="table table-bordered">
   <thead class="thead-dark">
     <tr class="text-center">
@@ -145,10 +127,8 @@
       </tr>
   <?php  }?>
   </tbody>
+	<?php echo 'Cool, that only took ' . (microtime(true) - $started_at) . ' seconds!'; ?>
 </table>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-
-    </script>
+<script></script>
 </body>
 </html>
