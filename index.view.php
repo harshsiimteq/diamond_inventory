@@ -8,26 +8,27 @@
 </head>
 <body>
 	<?php $started_at = microtime(true); ?>
-<form style="margin-top: 3%;">
-	<div class="container">
-		<div class="form-group">
-			<div class="row">
-				<div class="col-md-12">
-					<?php  ?>
-							<?php foreach ($resultTypeShape as $types): ?>
-								<?php foreach ($types as $key => $value): ?>
-									<button type="button" class="btn btn-primary" style="margin-bottom:1%;"><?=$value;?></button>
-								<?php endforeach; ?>
-							<?php endforeach; ?>
-				</div>
-			</div>
-		</div>
-	</div>
-</form>
+  <div class="container" style="margin-top: 2%;">
+<input type="text" name="search_table" id="search_table" placeholder="Search Inventory" class="form-control" style="margin-bottom: 2%;" />  
+</div>
 <div class="container">
+  <form style="margin-top: 3%;">
+    <div class="form-group">
+      <div class="row">
+        <div class="col-md-12">
+          <?php  ?>
+              <?php foreach ($resultTypeShape as $types): ?>
+                <?php foreach ($types as $key => $value): ?>
+                  <button type="button" class="btn btn-primary" style="margin-bottom:1%;"><?=$value;?></button>
+                <?php endforeach; ?>
+              <?php endforeach; ?>
+        </div>
+      </div>
+    </div>
+</form>
 
 </div>
-		<table class="table table-bordered">
+		<table class="table table-bordered" id="searchtable">
   <thead class="thead-dark">
     <tr class="text-center">
         <th>LOT NO #</th>
@@ -127,8 +128,20 @@
       </tr>
   <?php  }?>
   </tbody>
-	<?php echo 'Cool, that only took ' . (microtime(true) - $started_at) . ' seconds!'; ?>
+	<!-- <?php echo 'Cool, that only took ' . (microtime(true) - $started_at) . ' seconds!'; ?> -->
 </table>
-<script></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $("#search_table").keyup(function(){
+        _this = this;
+        // Show only matching TR, hide rest of them
+        $.each($("#searchtable tbody tr"), function() {
+        if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+          $(this).hide();
+        else
+          $(this).show();
+        });
+      });
+</script>
 </body>
 </html>
