@@ -18,15 +18,15 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="nav navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="index.php">Certified</a>
+        <a class="nav-link" href="index.php">Certified <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="blackIndex.php">Black <span class="sr-only">(current)</span></a>
+      <li class="nav-item">
+        <a class="nav-link" href="blackIndex.php">Black</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="fancyIndex.php">Fancy</a>
       </li>
-			<li class="nav-item">
+			<li class="nav-item active">
         <a class="nav-link" href="matchingPairIndex.php">Matching Pair</a>
       </li>
     </ul>
@@ -35,16 +35,16 @@
 <!-- Navigation ends here -->
 
 
-<?php $status = mysqli_query($con,"SELECT diamond_status, sum(diamond_size) AS Carat,count(diamond_shape_id) AS Count FROM diamonds WHERE `diamond_type` = 'Black'
-        AND `diamond_lot_no` LIKE 'B%' AND diamond_status NOT IN ('Deleted', 'Invoiced') GROUP BY diamond_status");
+<?php $status = mysqli_query($con,"SELECT diamond_status, sum(diamond_size) AS Carat,count(diamond_shape_id) AS Count FROM diamonds WHERE `diamond_type` = 'MatchingPair'
+        AND `diamond_lot_no` LIKE 'M%' AND diamond_status NOT IN ('Deleted', 'Invoiced') GROUP BY diamond_status");
 
         $locationStatus = mysqli_query($con, "SELECT office_name AS Location, COUNT(diamond_shape_id) AS Count, SUM(diamond_size) AS Carat FROM offices, diamonds
-        WHERE diamond_status NOT IN ('Deleted' , 'Invoiced') AND diamond_lot_no LIKE 'B%' AND diamond_type = 'Black' AND offices.office_id = diamonds.office_id GROUP BY office_name");
+        WHERE diamond_status NOT IN ('Deleted' , 'Invoiced') AND diamond_lot_no LIKE 'M%' AND diamond_type = 'MatchingPair' AND offices.office_id = diamonds.office_id GROUP BY office_name");
 				?>
  <div class="container">
 	 <div class="row">
 		 <div class="col-md-8">
-			 <h1 class="display-5" style="margin-top:2%;">Black <small>diamonds</small></h1>
+			 <h1 class="display-5" style="margin-top:2%;">Matching Pair <small>diamonds</small></h1>
 			 <input type="text" id="search_table" class="form-control" name="search_table" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Search Inventory" style="margin-bottom: 2%;">
 		 </div>
 	 	<div class="col-md-4">
@@ -103,7 +103,7 @@
 				</table>
 		  </div>
 		  <div class="tab-pane fade" id="certified" role="tabpanel" aria-labelledby="certified-tab">
-				<table class="table">
+        <table class="table">
           <thead>
             <tr>
               <th>Avl. Location</th>
@@ -143,8 +143,8 @@
  						<?php while($row_shape = mysqli_fetch_assoc($sql_shape)): ?>
  							<?php //print_r($row_shape); ?>
  	            <?php
- 	              $shape_count = mysqli_query($con, "SELECT COUNT(*) from `diamonds` WHERE `diamond_type` = 'Black'
-								        AND `diamond_lot_no` LIKE 'B%' AND `diamond_shape_id` = '".$row_shape['attribute_id']."' AND diamond_status NOT IN ('Returned', 'InvoicedRollOver', 'Archived', 'Deleted', 'Invoiced')");
+ 	              $shape_count = mysqli_query($con, "SELECT COUNT(*) from `diamonds` WHERE `diamond_type` = 'MatchingPair'
+								        AND `diamond_lot_no` LIKE 'M%' AND `diamond_shape_id` = '".$row_shape['attribute_id']."' AND diamond_status NOT IN ('Returned', 'InvoicedRollOver', 'Archived', 'Deleted', 'Invoiced')");
  	              $row_count = mysqli_fetch_array($shape_count);
  	             ?>
 							 <?php if ($row_count[0] != 0): ?>
@@ -167,9 +167,13 @@
         <th>LOT NO #</th>
         <th>LOC</th>
         <th>SHAPE</th>
-        <th>DESC.</th>
+        <th>DISCRIPTION</th>
+        <th>CARAT AVL.</th>
         <th>CARAT</th>
-        <th>MEASUREMENT L*B*H</th>
+        <th>PCS</th>
+        <th>CLR</th>
+        <th>CLA</th>
+        <th>MEASUREMENT L*B*H</span></th>
         <th>ORIGINAL P/C </th>
         <th>ORIGINAL TOTAL</th>
         <th>REVALUATED P/C</th>
@@ -179,9 +183,7 @@
         <th>SELLING P/C PRICE</th>
         <th>SELLING TOTAL</th>
         <th>STATUS</th>
-        <th>FRONT VIEW</th>
         <th>PURCHASE DATE (DD/MM/YYYY)</th>
-        <th>PARTY</th>
     </tr>
   </thead>
   <tbody class="text-center" id="display">
@@ -194,13 +196,13 @@
 <script>
 $(window).load(function() {
         $.ajax({
-          url: "blackdiamonds.php",
+          url: "matchingPairDiamond.php",
           context: document.body,
           success: function(html){
              $("#display").html(html);
           }
         });
-				$("#2").addClass('active');
+				$("#17").addClass('active');
       });
 
 $(document).ready(function() {
@@ -213,7 +215,7 @@ $(".product").click(function()
 		 $.ajax
 		 ({
 			type: "POST",
-			url: "blackdiamonds.php",
+			url: "matchingPairDiamond.php",
 			data: dataString,
 			cache: false,
 			success: function(html)

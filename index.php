@@ -27,10 +27,7 @@
         <a class="nav-link" href="fancyIndex.php">Fancy</a>
       </li>
 			<li class="nav-item">
-        <a class="nav-link" href="looseIndex.php">Loose</a>
-      </li>
-			<li class="nav-item">
-        <a class="nav-link" href="#">Temp. Loose</a>
+        <a class="nav-link" href="matchingPairIndex.php">Matching Pair</a>
       </li>
     </ul>
   </div>
