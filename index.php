@@ -34,6 +34,66 @@
 </nav>
 <!-- Navigation ends here -->
 
+<!-- Top bar starts here -->
+	<div class="container text-right">
+		<div class="row" style="margin-top: 1%;">
+			<div class="col-md-12">
+				<button type="button" id="add" class="btn btn-primary" name="button"  data-toggle="modal" data-target="#addcert">Add +</button>
+				<button type="button" id="delete" class="btn btn-danger" data-toggle="modal" data-target="#deletecert" name="button">Delete</button>
+			</div>
+		</div>
+	</div>
+<!-- Top bar ends here -->
+
+<!-- Modals -->
+<div class="modal fade" id="addcert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Certified >> Add</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+				<form method="post">
+					<div class="form-group">
+						<label for="Lotno">Lot no.</label>
+						<input type="text" name="Lotno" class="form-control" placeholder="C4543">
+					</div>
+
+				</form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Add</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deletecert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Certified >> Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+				
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Delete</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modals end -->
 
 <?php $status = mysqli_query($con,"SELECT diamond_status, sum(diamond_size) AS Carat,count(diamond_shape_id) AS Count FROM diamonds WHERE `diamond_type` = 'Certified'
         AND `diamond_lot_no` LIKE 'C%' AND diamond_status NOT IN ('Deleted', 'Invoiced') GROUP BY diamond_status");
@@ -73,31 +133,31 @@
 				<?php while($status_count = mysqli_fetch_assoc($status)): ?>
 					<?php if ($status_count['diamond_status'] == 'On Consignment'): ?>
 						<tr style="background-color: #F1C4C0;">
-						 <td><a href="#"><?= $status_count['diamond_status'] ?></a></td>
+						 <td><button type="button" id="onConsignment" class="btn btn-link" value="On Consignment" name="button"><?= $status_count['diamond_status'] ?></button></td>
 						 <td><?= $status_count['Count'] ?></td>
 						 <td><?= $status_count['Carat'] ?></td>
 					 </tr>
 				 <?php elseif($status_count['diamond_status'] == 'In Transfer Process'): ?>
 					 <tr style="background-color: #A9DFBF;">
-						<td><a href="#"><?= $status_count['diamond_status'] ?></a></td>
+						<td><button type="button" id="inTransfer" value="In Transfer Process" class="btn btn-link" name="button"><?= $status_count['diamond_status'] ?></button></td>
 						<td><?= $status_count['Count'] ?></td>
 						<td><?= $status_count['Carat'] ?></td>
 					</tr>
 				<?php elseif($status_count['diamond_status'] == 'Reserve'): ?>
 				 <tr style="background-color: #C4DBEA;">
-					<td><a href="#"><?= $status_count['diamond_status'] ?></a></td>
+					<td><button type="button" id="reserve" value="Reserve" class="btn btn-link" name="button"><?= $status_count['diamond_status'] ?></button></td>
 					<td><?= $status_count['Count'] ?></td>
 					<td><?= $status_count['Carat'] ?></td>
 				</tr>
 			<?php elseif($status_count['diamond_status'] == 'InTranist'): ?>
 			 <tr style="background-color: #F9E79F;">
-				<td><a href="#"><?= $status_count['diamond_status'] ?></a></td>
+				<td><button type="button" id="inTranist" value="InTranist" class="btn btn-link" name="button"><?= $status_count['diamond_status'] ?></button></td>
 				<td><?= $status_count['Count'] ?></td>
 				<td><?= $status_count['Carat'] ?></td>
 			</tr>
 		<?php elseif($status_count['diamond_status'] == 'Available'): ?>
 		 <tr>
-			<td><a href="#"><?= $status_count['diamond_status'] ?></a></td>
+			<td><button type="button" id="available" value="Available" class="btn btn-link" name="button"><?= $status_count['diamond_status'] ?></button></td>
 			<td><?= $status_count['Count'] ?></td>
 			<td><?= $status_count['Carat'] ?></td>
 		</tr>
@@ -253,6 +313,69 @@ $(window).load(function() {
         });
 				$("#2").addClass('active');
       });
+
+$(document).ready(function() {
+	$("#onConsignment").click(function() {
+		var val = $(this).val();
+		$("#search_table").val(val);
+		_this = this;
+		// Show only matching TR, hide rest of them
+		$.each($("#searchtable tbody tr"), function() {
+		if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+			$(this).hide();
+		else
+			$(this).show();
+		});
+	});
+	$("#inTransfer").click(function() {
+		var val = $(this).val();
+		$("#search_table").val(val);
+		_this = this;
+		// Show only matching TR, hide rest of them
+		$.each($("#searchtable tbody tr"), function() {
+		if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+			$(this).hide();
+		else
+			$(this).show();
+		});
+	});
+	$("#reserve").click(function() {
+		var val = $(this).val();
+		$("#search_table").val(val);
+		_this = this;
+		// Show only matching TR, hide rest of them
+		$.each($("#searchtable tbody tr"), function() {
+		if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+			$(this).hide();
+		else
+			$(this).show();
+		});
+	});
+	$("#inTranist").click(function() {
+		var val = $(this).val();
+		$("#search_table").val(val);
+		_this = this;
+		// Show only matching TR, hide rest of them
+		$.each($("#searchtable tbody tr"), function() {
+		if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+			$(this).hide();
+		else
+			$(this).show();
+		});
+	});
+	$("#available").click(function() {
+		var val = $(this).val();
+		$("#search_table").val(val);
+		_this = this;
+		// Show only matching TR, hide rest of them
+		$.each($("#searchtable tbody tr"), function() {
+		if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+			$(this).hide();
+		else
+			$(this).show();
+		});
+	});
+});
 
 $(document).ready(function() {
 $(".product").click(function()
