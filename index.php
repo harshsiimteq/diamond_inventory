@@ -83,7 +83,7 @@
         </button>
       </div>
       <div class="modal-body">
-				
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary">Delete</button>
@@ -109,7 +109,46 @@
 	 <div class="row">
 		 <div class="col-md-8">
 			 <h1 class="display-5" style="margin-top:2%;">Certified <small>diamonds</small></h1>
-			 <input type="text" id="search_table" class="form-control" name="search_table" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Search Inventory" style="margin-bottom: 2%;">
+			 <input type="text" id="search_table" class="form-control" name="search_table" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Filter..." style="margin-bottom: 2%;">
+			 <div class="card">
+  <div class="card-header bg-primary" style="color:white;">
+    Search
+  </div>
+  <div class="card-body">
+		<form method="post">
+			<div class="form-group">
+				<div class="row">
+					<div class="col-md-6">
+						<label for="exampleFormControlSelect1">Office</label>
+		    <select class="form-control" id="exampleFormControlSelect1">
+					<option selected disabled>Select location</option>
+					<option>Sydney</option>
+		      <option>Melbourne</option>
+		      <option>India</option>
+		      <option>All</option>
+		    </select>
+					</div>
+					<div class="col-md-6">
+						<label for="exampleFormControlSelect1">Status</label>
+		    <select class="form-control" id="exampleFormControlSelect1">
+					<option selected disabled>Select status</option>
+					<option>InTransit</option>
+		      <option>Available</option>
+		      <option>On Consignment</option>
+		      <option>Reserved</option>
+					<option>In Transfer Process</option>
+		    </select>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 2%">
+					<div class="col-md-12">
+						<p class="text-right"><button type="submit" name="button" class="btn btn-primary btn-sm">Search</button></p>
+					</div>
+				</div>
+	    </div>
+		</form>
+  </div>
+</div>
 		 </div>
 	 	<div class="col-md-4">
 
@@ -228,7 +267,7 @@
  	  <form style="margin-top: 3%;">
  	    <div class="form-group">
  	      <div class="row">
- 	        <div class="col-md-12">
+ 	        <div class="col-md-10" id="div">
  						<?php
  	  					$sql_shape = mysqli_query($con,"SELECT distinct(`attribute_label`),`attribute_id` FROM `attributes` WHERE `attribute_type` = 'Shape'");
  	 					?>
@@ -247,6 +286,14 @@
 
  	          <?php endwhile; ?>
  	        </div>
+					<div class="col-md-2">
+						<form method="post">
+							<div class="form-group">
+								<button type="submit" name="button" class="btn btn-outline-primary btn-sm">View All</button>
+								<button type="submit" name="button" class="btn btn-primary btn-sm">Select All</button>
+							</div>
+						</form>
+					</div>
  	      </div>
  	    </div>
  	</form>
@@ -311,7 +358,7 @@ $(window).load(function() {
              $("#display").html(html);
           }
         });
-				$("#2").addClass('active');
+				$("#"+$("#div button:first-child").attr("id")).addClass('active');
       });
 
 $(document).ready(function() {
