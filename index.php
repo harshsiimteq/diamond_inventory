@@ -40,6 +40,12 @@
 			<div class="col-md-12">
 				<button type="button" id="add" class="btn btn-primary" name="button"  data-toggle="modal" data-target="#addcert">Add +</button>
 				<button type="button" id="delete" class="btn btn-danger" data-toggle="modal" data-target="#deletecert" name="button">Delete</button>
+				<button type="button" id="cons" class="btn btn-outline-primary" data-toggle="modal" data-target="#cons" name="button">Quote</button>
+				<button type="button" id="cons" class="btn btn-outline-primary" data-toggle="modal" data-target="#cons" name="button">Send to consignment</button>
+				<button type="button" id="cons" class="btn btn-outline-primary" data-toggle="modal" data-target="#cons" name="button">Send to invoice</button>
+				<button type="button" id="cons" class="btn btn-outline-primary" data-toggle="modal" data-target="#cons" name="button">Release InTransit</button>
+				<button type="button" id="cons" class="btn btn-outline-primary" data-toggle="modal" data-target="#cons" name="button">Transfer</button>
+				<button type="button" id="cons" class="btn btn-outline-primary" data-toggle="modal" data-target="#cons" name="button">Print label</button>
 			</div>
 		</div>
 	</div>
@@ -118,33 +124,38 @@
 		<form method="post">
 			<div class="form-group">
 				<div class="row">
-					<div class="col-md-6">
-						<label for="exampleFormControlSelect1">Office</label>
-		    <select class="form-control" id="exampleFormControlSelect1">
-					<option selected disabled>Select location</option>
-					<option>Sydney</option>
-		      <option>Melbourne</option>
-		      <option>India</option>
-		      <option>All</option>
-		    </select>
+					<div class="col-md-4">
+						<label for="searchByLocation">Office</label>
+		    			<select class="form-control" id="searchByLocation">
+							<option selected disabled>Select location</option>
+							<option>Sydney</option>
+		      				<option>Melbourne</option>
+		      				<option>India</option>
+		    			</select>
 					</div>
-					<div class="col-md-6">
-						<label for="exampleFormControlSelect1">Status</label>
-		    <select class="form-control" id="exampleFormControlSelect1">
-					<option selected disabled>Select status</option>
-					<option>InTransit</option>
-		      <option>Available</option>
-		      <option>On Consignment</option>
-		      <option>Reserved</option>
-					<option>In Transfer Process</option>
-		    </select>
+					<div class="col-md-4">
+						<label for="searchByStatus">Status</label>
+					    <select class="form-control" id="searchByStatus">
+							<option selected disabled>Select status</option>
+							<option>InTranist</option>
+					      	<option>Available</option>
+					      	<option>On Consignment</option>
+					      	<option>Reserve</option>
+							<option>In Transfer Process</option>
+					    </select>
 					</div>
+					<div class="col-md-4">
+					<label for="searchByShape">Shapes</label>
+				    <select class="form-control" id="searchByShape">
+						<option selected disabled>Select shape</option>
+						<option>ROUND</option>
+				    	<option>CUSHION</option>
+				      	<option>PEAR</option>
+				      	<option>ASSCHER</option>
+						<option>EMERALD</option>
+				    </select>
 				</div>
-				<div class="row" style="margin-top: 2%">
-					<div class="col-md-12">
-						<p class="text-right"><button type="submit" name="button" class="btn btn-primary btn-sm">Search</button></p>
-					</div>
-				</div>
+			</div>
 	    </div>
 		</form>
   </div>
@@ -358,7 +369,7 @@ $(window).load(function() {
              $("#display").html(html);
           }
         });
-				$("#"+$("#div button:first-child").attr("id")).addClass('active');
+		$("#"+$("#div button:first-child").attr("id")).addClass('active');
       });
 
 $(document).ready(function() {
@@ -456,6 +467,39 @@ $(".product").click(function()
           $(this).show();
         });
       });
+</script>
+<script>
+	$("#searchByStatus").on('change', function(){
+        _this = this;
+        // Show only matching TR, hide rest of them
+        $.each($("#searchtable tbody tr"), function() {
+        if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+          $(this).hide();
+        else
+          $(this).show();
+        });
+      });
+	$("#searchByLocation").on('change', function(){
+        _this = this;
+        // Show only matching TR, hide rest of them
+        $.each($("#searchtable tbody tr"), function() {
+        if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+          $(this).hide();
+        else
+          $(this).show();
+        });
+      });
+	$("#searchByLocation").on('change', function(){
+        _this = this;
+        // Show only matching TR, hide rest of them
+        $.each($("#searchtable tbody tr"), function() {
+        if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+          $(this).hide();
+        else
+          $(this).show();
+        });
+      });
+	
 </script>
 </body>
 </html>
