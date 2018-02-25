@@ -501,5 +501,10 @@ $(".product").click(function()
       });
 	
 </script>
+<script>
+	$("#delete").click(function() {
+        
+	});
+</script>			
 </body>
 </html>

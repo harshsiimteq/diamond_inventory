@@ -21,7 +21,7 @@ $shape_id = $_POST['shape'];
      if ($row_diamond['diamond_status'] == 'On Consignment') {
        echo "
        <tr style='font-size:16px; background-color: #F1C4C0;'>
-         <td><input type='checkbox' id='exampleCheck1'></td>
+         <td><input type='checkbox' id=".$row_diamond['diamond_lot_no']."></td>
          <td>".$row_diamond['diamond_lot_no']."</td>
          <td>".$row_office['office_name']."</td>
          <td>".$row_shape['attribute_name']."</td>
@@ -73,7 +73,7 @@ $shape_id = $_POST['shape'];
      } else if ($row_diamond['diamond_status'] == 'InTranist') {
        echo "
        <tr style='font-size:16px; background-color: #F9E79F;' class='text-center'>
-       <td><input type='checkbox' id='exampleCheck1'></td>
+       <td><input type='checkbox' id=".$row_diamond['diamond_lot_no']."></td>
          <td>".$row_diamond['diamond_lot_no']."</td>
          <td>".$row_office['office_name']."</td>
          <td>".$row_shape['attribute_name']."</td>
@@ -125,7 +125,7 @@ $shape_id = $_POST['shape'];
      } else if ($row_diamond['diamond_status'] == 'In Transfer Process') {
        echo "
        <tr style='font-size:16px; background-color: #A9DFBF;' class='text-center'>
-       <td><input type='checkbox' id='exampleCheck1'></td>
+       <td><input type='checkbox' id=".$row_diamond['diamond_lot_no']."></td>
          <td>".$row_diamond['diamond_lot_no']."</td>
          <td>".$row_office['office_name']."</td>
          <td>".$row_shape['attribute_name']."</td>
@@ -177,7 +177,7 @@ $shape_id = $_POST['shape'];
      } else if ($row_diamond['diamond_status'] == 'Available') {
        echo "
        <tr style='font-size:16px;' class='text-center'>
-       <td><input type='checkbox' id='exampleCheck1'></td>
+       <td><input type='checkbox' id=".$row_diamond['diamond_lot_no']."></td>
          <td>".$row_diamond['diamond_lot_no']."</td>
          <td>".$row_office['office_name']."</td>
          <td>".$row_shape['attribute_name']."</td>
@@ -229,7 +229,7 @@ $shape_id = $_POST['shape'];
      } else if ($row_diamond['diamond_status'] == 'Reserve') {
        echo "
        <tr style='font-size:16px; background-color: #C4DBEA;' class='text-center'>
-       <td><input type='checkbox' id='exampleCheck1'></td>
+       <td><input type='checkbox' id=".$row_diamond['diamond_lot_no']."></td>
          <td>".$row_diamond['diamond_lot_no']."</td>
          <td>".$row_office['office_name']."</td>
          <td>".$row_shape['attribute_name']."</td>
@@ -281,7 +281,7 @@ $shape_id = $_POST['shape'];
      } else {
        echo "
        <tr style='font-size:16px;' class='text-center'>
-       <td><input type='checkbox' id='exampleCheck1'></td>
+       <td><input type='checkbox' id=".$row_diamond['diamond_lot_no']."></td>
          <td>".$row_diamond['diamond_lot_no']."</td>
          <td>".$row_office['office_name']."</td>
          <td>".$row_shape['attribute_name']."</td>
